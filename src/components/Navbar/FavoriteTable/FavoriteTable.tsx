@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { DataGrid, GridRenderCellParams }  from '@mui/x-data-grid';
 import { Person } from '@/models';
-import { Checkbox } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite } from '@/redux/states';
+import { addFavorite, removeFavorite } from '@/redux/states';
 import { AppStore } from '@/redux/store';
 
 export interface FavoriteTableInterface {}
@@ -14,18 +15,16 @@ const FavoriteTable: React.FC<FavoriteTableInterface> = () => {
 	const dispatch = useDispatch();
 	const stateFavorites = useSelector((store: AppStore) => store.favorites );
 
-	const [selectedPeople, setSelectedPeople] = useState<Person[]>([]); 
-
-	const findPerson = (person: Person) => !!selectedPeople.find(p => p.id === person.id);
-	const filterPerson = (person: Person) => selectedPeople.filter(p => p.id !== person.id);
-
-	const handleChange = (person: Person) => {
-		const filteredPeople = findPerson(person) ? filterPerson(person) : [...selectedPeople, person];
-		dispatch(addFavorite(filteredPeople));
-		setSelectedPeople(filteredPeople);
-	}
+	const handleClick = (person: Person) => {
+		dispatch(removeFavorite(person));
+	};
 
 	const columns = [
+		{ field: 'actions', headerName: '', type: 'actions', sortable: false, width: 50, renderCell: (params: GridRenderCellParams) => <>{
+			<IconButton color="secondary" aria-label="favorites" component="label" onClick={() => handleClick(params.row)}>
+				<Delete />
+		  	</IconButton>
+		}</> },
 		{ field: 'name', headerName: 'Name', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
 		{ field: 'category', headerName: 'Category', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
 		{ field: 'company', headerName: 'Company', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
