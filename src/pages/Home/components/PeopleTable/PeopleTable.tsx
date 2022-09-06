@@ -14,11 +14,12 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
 	
 	const dispatch = useDispatch();
 	const statePeople = useSelector((store: AppStore) => store.people );
+	const favoritesPeople = useSelector((store: AppStore) => store.favorites );
 
 	const [selectedPeople, setSelectedPeople] = useState<Person[]>([]); 
 
-	const findPerson = (person: Person) => !!selectedPeople.find(p => p.id === person.id);
-	const filterPerson = (person: Person) => selectedPeople.filter(p => p.id !== person.id);
+	const findPerson = (person: Person) => !!favoritesPeople.find(p => p.id === person.id);
+	const filterPerson = (person: Person) => favoritesPeople.filter(p => p.id !== person.id);
 
 	const handleChange = (person: Person) => {
 		const filteredPeople = findPerson(person) ? filterPerson(person) : [...selectedPeople, person];

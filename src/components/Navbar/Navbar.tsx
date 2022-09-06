@@ -1,5 +1,7 @@
+import { AppStore } from '@/redux/store';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { CustomDialog } from '../CustomDialog';
 import { dialogOpenSubject$ } from '../CustomDialog/CustomDialog';
 import { FavoriteTable } from './FavoriteTable';
