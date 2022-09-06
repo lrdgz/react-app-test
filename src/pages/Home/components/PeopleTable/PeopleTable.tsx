@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid, GridRenderCellParams }  from '@mui/x-data-grid';
 import { Person } from '@/models';
 import { Checkbox } from '@mui/material';
@@ -37,6 +37,10 @@ const PeopleTable: React.FC<PeopleTableInterface> = () => {
 		{ field: 'company', headerName: 'Company', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
 		{ field: 'levelOfHappiness', headerName: 'Level Of Happiness', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
 	];
+
+	useEffect(() => {
+		setSelectedPeople(favoritesPeople);
+	}, [favoritesPeople]);
 
 
 	return (
