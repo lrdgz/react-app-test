@@ -13,4 +13,6 @@ export const favoritesSlice = createSlice({
             return action.payload;
         }
     }
-})
+});
+
+export const { addFavorite } = favoritesSlice.actions;

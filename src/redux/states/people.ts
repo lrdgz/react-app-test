@@ -13,4 +13,6 @@ export const peopleSlice = createSlice({
             return action.payload;
         }
     }
-})
+});
+
+export const { addPeople } = peopleSlice.actions;
