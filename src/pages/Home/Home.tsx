@@ -20,7 +20,7 @@ const Home: React.FC<HomeInterface> = () => {
 
 	const columns = [
 		// { field: name, headerName: 'Name', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value + params.row.category}</> },
-		{ field: 'actions', headerName: '', width: 50, renderCell: (params: GridRenderCellParams) => <>{
+		{ field: 'actions', headerName: '', type: 'actions', sortable: false, width: 50, renderCell: (params: GridRenderCellParams) => <>{
 			<Checkbox size="small" checked={findPerson(params.row)} onChange={ () => handleChange(params.row) } />
 		}</> },
 		{ field: 'name', headerName: 'Name', flex: 1, minWidth: 150, renderCell: (params: GridRenderCellParams) => <>{params.value}</> },
